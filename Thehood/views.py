@@ -10,8 +10,7 @@ def home (request):
 @login_required(login_url='/accounts/login/')
 def profile(request):
     current_user=request.user
-    details=HoodDetails.objects.all()
-    posts=Post.objects.all()
+  
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES)
         postform = PostForm(request.POST, request.FILES)
@@ -26,5 +25,5 @@ def profile(request):
             post.save()
     else:
         form = ProfileForm()
-        postform = PostForm()
-    return render(request, 'profile.html',{"form":form,"posts":posts,"postform":postform,"details":details})
+       
+    return render(request, 'profile.html',{"form":form})
