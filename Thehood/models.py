@@ -11,3 +11,18 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username}'
+
+
+
+
+class Neighbourhood(models.Model):
+    HOODS = (
+        ('South B','South B'),
+        ('Makongeni','Makongeni'),
+        ('Kileleshwa','Kileleshwa'),
+    )
+    neighbourhood = models.CharField(max_length=255,choices=HOODS)
+    pic = models.ImageField(blank=True,upload_to = 'hoods/')
+
+    def __str__(self):
+        return f'{self.neighbourhood}'
