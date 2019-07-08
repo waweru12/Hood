@@ -1,10 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import ProfileForm,PostForm,HoodForm
 from .models import Profile,Neighbourhood,Post,HoodDetails
 # Create your views here.
-
 
 
 @login_required(login_url='/accounts/login/')
@@ -39,7 +38,7 @@ def add_hood(request):
         hoodform = HoodForm(request.POST, request.FILES)
         if hoodform.is_valid():
             upload = hoodform.save(commit=False)
-            upload.profile = request.user.profile
+            upload = request.user
             upload.save()
             return redirect('home_page')
     else:
@@ -47,26 +46,27 @@ def add_hood(request):
     return render(request,'add-hood.html',locals())
     
 
-@login_required(login_url='/accounts/login')
-def join(request,neighborhood_id):
-    hood = NeighborHood.objects.get(id=neighborhood_id)
-    current_user = request.user
-    current_user.profile.neighborhood = hood
-    current_user.profile.save()
-    return redirect('hood',neighborhood_id)
 
 @login_required(login_url='/accounts/login')
-def leave(request,neighborhood_id):
+def join(request,neighbourhood_id):
+    hood = Neighbourhood.objects.get(id=neighbourhood_id)
     current_user = request.user
-    current_user.profile.neighborhood = None
+    current_user.profile.neighbourhood = hood
+    current_user.profile.save()
+    return redirect('hood',neighbourhood_id)
+
+@login_required(login_url='/accounts/login')
+def leave(request,neighbourhood_id):
+    current_user = request.user
+    current_user.profile.neighbourhood = None
     current_user.profile.save()
     return redirect('home_page')
 
 @login_required(login_url='/accounts/login/')
-def hood(request,neighborhood_id):
+def hood(request,neighbourhood_id):
     current_user = request.user
-    hood_name = current_user.profile.neighborhood
-    single_hood = NeighborHood.objects.get(id = request.user.profile.neighborhood.id)
+    hood_name = current_user.profile.neighbourhood
+    single_hood = Neighbourhood.objects.get(id = request.user.profile.neighborhood.id)
     comments = Comment.objects.all()
     form = CommentForm(instance=request.user)
 

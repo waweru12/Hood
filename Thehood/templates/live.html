@@ -12,6 +12,10 @@
          <h5 class="card-title">{{hood.neighbourhood}}</h5>
        </div>
      </div>
+
+     <p><strong>{{hood.name}}</strong> {{hood.location}}</p>
+     <a href="{% url 'join' neighbourhood_id=hood.id %}"class="btn btn-outline-success">Join neighbourhood</a>
+     <p class="card-text" style="font-size:14px;"><small class="text-muted">Since
      {% endfor %}
    </div>
  </div>

@@ -6,7 +6,11 @@ from . import views
 urlpatterns=[
    url(r'^accounts/profile/$',views.profile,name = 'profile'),
  
-   url(r'^$',views.timeline,name = 'timeline'),
+   url(r'^$',views.timeline,name = 'home_page'),
+   url(r'^hood/$', views.add_hood, name='add_hood'),
+   url(r'^join(?P<neighbourhood_id>\d+)',views.join, name='join'),
+   url(r'^leave/(?P<neighbourhood_id>\d+)',views.leave, name='leave'),
+   url(r'^one_hood(?P<neighbourhood_id>\d+)',views.hood, name='hood'),
 ]
 
 
