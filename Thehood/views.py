@@ -37,13 +37,11 @@ def add_hood(request):
     if request.method == 'POST':
         hoodform = HoodForm(request.POST, request.FILES)
         if hoodform.is_valid():
-            upload = hoodform.save(commit=False)
-            upload = request.user
-            upload.save()
+            upload = hoodform.save()
             return redirect('home_page')
     else:
         hoodform = HoodForm()
-    return render(request,'add-hood.html',locals())
+    return render(request,'add-hood.html',{"hoodform":hoodform})
     
 
 
@@ -66,8 +64,21 @@ def leave(request,neighbourhood_id):
 def hood(request,neighbourhood_id):
     current_user = request.user
     hood_name = current_user.profile.neighbourhood
-    single_hood = Neighbourhood.objects.get(id = request.user.profile.neighborhood.id)
-    comments = Comment.objects.all()
-    form = CommentForm(instance=request.user)
-
+    single_hood = Neighbourhood.objects.get(id = neighbourhood_id)
+  
     return render(request,'hood.html',locals())
+
+@login_required(login_url='/accounts/login')
+def upload_business(request):
+    hood = NeighborHood.objects.get(id=request.user.profile.neighborhood.id)
+    if request.method == 'POST':
+        businessform = BusinessForm(request.POST, request.FILES)
+        if businessform.is_valid():
+            upload = businessform.save(commit=False)
+            upload.user=request.user
+            upload.neighborHood=request.user.profile.neighborhood
+            upload.save()
+        return redirect('hood',request.user.profile.neighborhood.id)
+    else:
+        businessform = BusinessForm()
+    return render(request,'Business.html',locals())

@@ -15,8 +15,22 @@
 
      <p><strong>{{hood.name}}</strong> {{hood.location}}</p>
      <a href="{% url 'join' neighbourhood_id=hood.id %}"class="btn btn-outline-success">Join neighbourhood</a>
-     <p class="card-text" style="font-size:14px;"><small class="text-muted">Since
+     <p class="card-text" style="font-size:14px;"><small class="text-muted">  </p>
+
+      {% empty%}
+      <p> No Neighbourhoods</p>
+
      {% endfor %}
    </div>
  </div>
- {% endblock %}
+
+ <!-- <div class="container-fluid"> -->
+   <!-- <div class="row"> -->
+     <!-- {% for hood in hoods %} -->
+     <!-- <p>{{ hood.neighbourhood}}</p> -->
+     <!-- {% empty %} -->
+     <!-- <p>Nut'n in it</p> -->
+     <!-- {% endfor%} -->
+   <!-- </div> -->
+ <!-- </div> -->
+ <!-- {% endblock %} -->
