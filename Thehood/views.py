@@ -4,8 +4,7 @@ from django.contrib.auth.models import User
 from .forms import ProfileForm,PostForm
 from .models import Profile,Neighbourhood,Post,HoodDetails
 # Create your views here.
-def home (request):
-    return render(request,'index.html')
+
 
 
 @login_required(login_url='/accounts/login/')
@@ -32,4 +31,4 @@ def profile(request):
 
 def timeline(request):
     hoods=Neighbourhood.objects.all()
-    return render(request, 'timeline.html',{"hoods":hoods})
+    return render(request, 'live.html',{"hoods":hoods})
