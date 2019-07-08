@@ -17,26 +17,12 @@
     <div class="row" id="main">
         <div class="col-md-4 col-sm-4">
             <div class="card text-center" style="width:90%;">
-                <a href="" style="margin-left:80%;margin-top:3%;" class="dropdown-toggle btn btn-default"
-                    data-toggle="dropdown" role="button" aria-expanded="false">
-                    <i class="fas fa-cog" style="font-size:20px;"></i>
-                </a>
-                <ul class="dropdown-menu" role="menu" style="padding-left:1%; ;">
-                    <li>
-                        <a href="{%url 'profile' %}">Account</a>
-                    </li>
-                    <li>
-                        <a href="/accounts/password/change">Change Password</a>
-                    </li>
-                    <li>
-                        <a href="" data-toggle="modal" data-target="#edit" style="color:gray;">Edit Profile</a>
-                    </li>
-                </ul>
+              
                 <div class="modal fade" id="edit" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                         <div class="modal-content">
-                            <div class="modal-header" style="padding-left:20%;background-color: #E8DEDC;">
+                            <div class="modal-header" style="padding-left:20%;background-color:rgb(238, 223, 220);">
                                 <div class="row">
                                     <form action="{%url 'profile' %}" method="post" enctype="multipart/form-data"
                                         style="margin-top:10%;color: white;">
@@ -93,7 +79,7 @@
                         <img src="{{user.profile.neighbourhood.pic.url}}" class="img-fluid" style="height:300px;width:100%;" alt="...">
                 </div>
                 <div class="row">
-                        <a class="btn btn-primary" href="" data-toggle="modal" data-target="#biz" style="color:white;">Click to view businesses in {{user.profile.neighbourhood}}</a>
+                      
                 <div class="modal fade" id="biz" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable" role="document">
