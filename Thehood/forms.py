@@ -1,4 +1,4 @@
-from .models import Profile,Post,Neighbourhood
+from .models import Profile,Post,Neighbourhood,Business
 from django import forms
 
 class ProfileForm(forms.ModelForm):
@@ -17,3 +17,7 @@ class HoodForm(forms.ModelForm):
         model = Neighbourhood
         fields = ('neighbourhood','pic')
 
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ['user','profile','neighborhood']

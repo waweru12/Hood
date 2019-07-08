@@ -48,3 +48,30 @@ class Post(models.Model):
     image = models.ImageField(upload_to = 'images/')
     def __str__(self):
         return f'{self.user}'
+
+
+class Business(models.Model):
+    name = models.CharField(max_length=50,blank=True)
+    image = models.ImageField(upload_to = 'images/')
+    user = models.ForeignKey(User, null = True,related_name='user')
+    neighbourhood = models.ForeignKey(Neighbourhood, null = True,related_name='business')
+    class Meta:
+        ordering = ['-pk']
+
+    def save_business(self):
+        self.save()
+
+    @classmethod
+    def get_business(cls, profile):
+        business = Business.objects.filter(Profile__pk = profile)
+        return business
+    
+    @classmethod
+    def get_all_business(cls):
+        project = Project.objects.all()
+        return project
+
+    @classmethod
+    def search(cls,search_term):
+        biz = cls.objects.filter(name__icontains=search_term)
+        return biz
