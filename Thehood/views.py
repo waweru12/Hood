@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import ProfileForm,PostForm
+from .forms import ProfileForm,PostForm,HoodForm
 from .models import Profile,Neighbourhood,Post,HoodDetails
 # Create your views here.
 
@@ -32,3 +32,41 @@ def profile(request):
 def timeline(request):
     hoods=Neighbourhood.objects.all()
     return render(request, 'live.html',{"hoods":hoods})
+    @login_required(login_url='/accounts/login')
+def add_hood(request):
+    if request.method == 'POST':
+        hoodform = HoodForm(request.POST, request.FILES)
+        if hoodform.is_valid():
+            upload = hoodform.save(commit=False)
+            upload.profile = request.user.profile
+            upload.save()
+            return redirect('home_page')
+    else:
+        hoodform = HoodForm()
+    return render(request,'add-hood.html',locals())
+    
+
+@login_required(login_url='/accounts/login')
+def join(request,neighborhood_id):
+    hood = NeighborHood.objects.get(id=neighborhood_id)
+    current_user = request.user
+    current_user.profile.neighborhood = hood
+    current_user.profile.save()
+    return redirect('hood',neighborhood_id)
+
+@login_required(login_url='/accounts/login')
+def leave(request,neighborhood_id):
+    current_user = request.user
+    current_user.profile.neighborhood = None
+    current_user.profile.save()
+    return redirect('home_page')
+
+@login_required(login_url='/accounts/login/')
+def hood(request,neighborhood_id):
+    current_user = request.user
+    hood_name = current_user.profile.neighborhood
+    single_hood = NeighborHood.objects.get(id = request.user.profile.neighborhood.id)
+    comments = Comment.objects.all()
+    form = CommentForm(instance=request.user)
+
+    return render(request,'hood.html',locals())
