@@ -81,4 +81,4 @@ def upload_business(request):
         return redirect('hood',request.user.profile.neighborhood.id)
     else:
         businessform = BusinessForm()
-    return render(request,'Business.html',locals())
+    return render(request,'business.html',locals())
