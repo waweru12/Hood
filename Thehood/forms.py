@@ -1,4 +1,4 @@
-from .models import Profile,Post
+from .models import Profile,Post,Neighbourhood
 from django import forms
 
 class ProfileForm(forms.ModelForm):
@@ -14,6 +14,6 @@ class PostForm(forms.ModelForm):
 
 class HoodForm(forms.ModelForm):
     class Meta:
-        model = NeighborHood
+        model = Neighbourhood
         exclude= ['occupants']
 

@@ -32,7 +32,8 @@ def profile(request):
 def timeline(request):
     hoods=Neighbourhood.objects.all()
     return render(request, 'live.html',{"hoods":hoods})
-    @login_required(login_url='/accounts/login')
+  
+@login_required(login_url='/accounts/login')    
 def add_hood(request):
     if request.method == 'POST':
         hoodform = HoodForm(request.POST, request.FILES)
