@@ -62,6 +62,7 @@ def leave(request,neighbourhood_id):
 
 @login_required(login_url='/accounts/login/')
 def hood(request,neighbourhood_id):
+    neighbourhood = Neighbourhood.objects.all()
     current_user = request.user
     hood_name = current_user.profile.neighbourhood
     single_hood = Neighbourhood.objects.get(id = neighbourhood_id)
@@ -70,15 +71,15 @@ def hood(request,neighbourhood_id):
 
 @login_required(login_url='/accounts/login')
 def upload_business(request):
-    hood = NeighborHood.objects.get(id=request.user.profile.neighborhood.id)
+    hood = Neighbourhood.objects.get(id=request.user.profile.neighbourhood.id)
     if request.method == 'POST':
         businessform = BusinessForm(request.POST, request.FILES)
         if businessform.is_valid():
             upload = businessform.save(commit=False)
             upload.user=request.user
-            upload.neighborHood=request.user.profile.neighborhood
+            upload.neighbourhood=request.user.profile.neighbourhood
             upload.save()
-        return redirect('hood',request.user.profile.neighborhood.id)
+        return redirect('hood',request.user.profile.neighbourhood.id)
     else:
         businessform = BusinessForm()
     return render(request,'business.html',locals())

@@ -3,10 +3,11 @@
 {% block content %}
 {{ block.super }}
 <div class="container-fluid" id="single-hoody">
-    <h6 style="text-align: center">{{single_hood.name}}</h6>
+    <h6 style="text-align: center">{{neighbourhood.name}}</h6>
     <br>
-    <h6 style="text-align: center">{{single_hood.occupants.count}}</h6>
+    <h6 style="text-align: center">{{neighbourhood.occupants.count}}</h6>
     <br>
+    
     <a href="{% url 'leave' neighbourhood_id=single_hood.id %}" class="btn btn-outline-danger">Leave neighbourhood</a>
     <a href="{% url 'upload_business' %}" class="btn btn-outline-primary">Include Business</a>
 
@@ -23,19 +24,8 @@
         {% endfor %}
     </div>
 
-    <h5>Updates</h5>
-    <div class="row">
-        {% for conv in single_hood.posts.all %}
-        <div class="card" style="width:302px" id="pst">
-            <img class="card-img-top" src="{{conv.image.url}}" alt="Card image" style="width:300px;height:300px">
-            <div class="card-body">
-                <h5 class="card-title"><strong>{{conv.name}}</strong></h5>
-                <p class="card-text">{{conv.user.username}}</p>
-                <h6 class="card-text">{{conv.description}}</h6>
-                <h6 class="card-text">{{conv.pub_date}}</h6>
-            </div>
-        </div>
-        {% endfor %}
+    
+      
         {% endblock %}
     </div>
 </div>

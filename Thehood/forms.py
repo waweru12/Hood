@@ -15,9 +15,9 @@ class PostForm(forms.ModelForm):
 class HoodForm(forms.ModelForm):
     class Meta:
         model = Neighbourhood
-        fields = ('neighbourhood','pic')
+        fields = ('neighbourhood','pic','location')
 
 class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
-        exclude = ['user','profile','neighborhood']
+        exclude = ['user','profile','neighbourhood']
