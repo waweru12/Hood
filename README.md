@@ -78,6 +78,18 @@ Find all the versions used in the requirements.txt or run the following command 
 ```
 pip freeze
 ```
+
+## Behaviour Driven Development
+| Behavior our program should handle | Input description                                                                  |  Output description
+| ---------------------------------- | ---------------------------------------------------------------------------------- | ---
+| `Register/Sign up`                 | Fill in the required details                                                       | The user will recieve an activation email
+| `Login`                            | Enter the reqired details                                                          |  The user will be redirected to the homepage
+| `Create profile`                   | The user is supposed to create their profile so as to identify their neighbourhood | Displays the users profile
+| `Notifications`                    | The user can create notifictions and post them for users to see                    | Displays various notifications
+| `Authorities`                      | The user can add various authorities                                               | Displays all the authories
+| `Businesses`                       | The user can add different business | Displays all the businesses
+
+
 ## Authors
 
 * **Austin Waweru**
