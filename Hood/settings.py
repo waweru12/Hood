@@ -111,15 +111,15 @@ WSGI_APPLICATION = 'Hood.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'hood',
-        'USER':'austin',
-        'PASSWORD':'1234',
+# DATABASES = {
+#     'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#         'NAME':'hood',
+#         'USER':'austin',
+#         'PASSWORD':'1234',
 
-    }
-}
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
